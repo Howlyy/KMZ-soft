@@ -6,11 +6,13 @@ using System.Windows.Forms;
 
 namespace KMZ_soft
 {
-    static class Program
+    static class KMZsoft
     {
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+        /// 
+        static public int LoggerUserId;
         [STAThread]
         static void Main()
         {

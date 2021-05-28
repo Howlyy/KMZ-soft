@@ -41,7 +41,7 @@ namespace KMZ_soft
             this.LoginUserTB.Location = new System.Drawing.Point(118, 29);
             this.LoginUserTB.Name = "LoginUserTB";
             this.LoginUserTB.Size = new System.Drawing.Size(142, 23);
-            this.LoginUserTB.TabIndex = 0;
+            this.LoginUserTB.TabIndex = 1;
             // 
             // label1
             // 
@@ -57,7 +57,7 @@ namespace KMZ_soft
             this.LoginBTN.Location = new System.Drawing.Point(91, 98);
             this.LoginBTN.Name = "LoginBTN";
             this.LoginBTN.Size = new System.Drawing.Size(141, 67);
-            this.LoginBTN.TabIndex = 2;
+            this.LoginBTN.TabIndex = 3;
             this.LoginBTN.Text = "Zaloguj";
             this.LoginBTN.UseVisualStyleBackColor = true;
             this.LoginBTN.Click += new System.EventHandler(this.LoginBTN_Click);
@@ -66,8 +66,9 @@ namespace KMZ_soft
             // 
             this.LoginPassTB.Location = new System.Drawing.Point(118, 58);
             this.LoginPassTB.Name = "LoginPassTB";
+            this.LoginPassTB.PasswordChar = '*';
             this.LoginPassTB.Size = new System.Drawing.Size(142, 23);
-            this.LoginPassTB.TabIndex = 0;
+            this.LoginPassTB.TabIndex = 2;
             // 
             // LoginPassLB
             // 
