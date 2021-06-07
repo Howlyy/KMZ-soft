@@ -10,23 +10,33 @@ using System.Configuration;
 
 
 
+
 namespace KMZ_soft
 {
     public partial class WareForm : Form
     {
         SqlConnection db_con;
 
-        string selected_ware_name;
-        string selected_ware_category;
-        double selected_ware_price;
-        int selected_ware_tax;
-        int selected_ware_quantity;
-        int selected_ware_id;
+        public static string selected_ware_name;
+        public static string selected_ware_category;
+        public static double selected_ware_price;
+        public static int selected_ware_tax;
+        public static int selected_ware_quantity;
+        public static int selected_ware_id;
 
         public WareForm()
         {
             InitializeComponent();
             db_con = new SqlConnection(ConfigurationManager.ConnectionStrings["KMZdb"].ConnectionString) ;
+
+            if ((KMZsoft.user_permissions(KMZsoft.LoggerUserId)) > 1)
+            {
+                WareAddBTN.Visible = true;
+            }
+            else
+            {
+                WareAddBTN.Visible = false;
+            }
         }
 
         private void WareSearchBTN_Click(object sender, EventArgs e)
@@ -50,16 +60,29 @@ namespace KMZ_soft
        
         private void WareAddBTN_Click(object sender, EventArgs e)
         {
-            Form ware_add_form = new Wa
+            
+            Form ware_add_form = new Ware.WareAddForm();
+            ware_add_form.Show();
+            
         }
         private void WareDeleteBTN_Click(object sender, EventArgs e)
         {
-
+                   
         }
 
         private void WareModBTN_Click(object sender, EventArgs e)
         {
-
+            
+            if(data_datagrid() == 0)
+            {
+                Form ware_mod_form = new Ware.WareModForm();
+                ware_mod_form.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nie ma czego modyfikować! Wyszkuja towar!");
+            }
+            
         }
 
         //metods
@@ -112,39 +135,12 @@ namespace KMZ_soft
             db_con.Close();
         }
 
-        private double ware_add(string ware_name, string category, double price, int tax, int quantity)
+    
+
+        private void ware_delete(int ware_id)
         {
 
-            int id_user = KMZsoft.LoggerUserId;
-
-            SqlCommand cmd_ware_search = new SqlCommand("ware_add", db_con);
-
-            cmd_ware_search.CommandType = CommandType.StoredProcedure;
-
-            cmd_ware_search.Parameters.AddWithValue("@ware_name", SqlDbType.NVarChar).Value = ware_name;
-            cmd_ware_search.Parameters.AddWithValue("@category", SqlDbType.NVarChar).Value = category;
-            cmd_ware_search.Parameters.AddWithValue("@price", SqlDbType.SmallMoney).Value = price;
-            cmd_ware_search.Parameters.AddWithValue("@tax", SqlDbType.Decimal).Value = tax;
-            cmd_ware_search.Parameters.AddWithValue("@quantity", SqlDbType.Decimal).Value = quantity;
-            cmd_ware_search.Parameters.AddWithValue("@id_user", SqlDbType.Int).Value = id_user;
-            cmd_ware_search.Parameters.AddWithValue("@result", SqlDbType.NVarChar).Direction = ParameterDirection.Output;
-
-            cmd_ware_search.ExecuteNonQuery();
-
-            int ware_add_result = (int)cmd_ware_search.Parameters["@result"].Value;
-
-            if(ware_add_result == 666)
-            {
-                MessageBox.Show("Taki towar już istnieje! Sprawdz dane");
-            }
-            else
-            {
-                MessageBox.Show("Poprawnie dodano towar!");
-                Hide();
-            }
-            
         }
-
         private int ware_id(string ware_name)
         {
 

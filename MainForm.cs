@@ -44,5 +44,7 @@ namespace KMZ_soft
             sell_form.Show();
 
         }
+
+       
     }
 }
