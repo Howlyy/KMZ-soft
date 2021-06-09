@@ -19,9 +19,9 @@ namespace KMZ_soft
 
         public static string selected_ware_name;
         public static string selected_ware_category;
-        public static double selected_ware_price;
-        public static int selected_ware_tax;
-        public static int selected_ware_quantity;
+        public static decimal selected_ware_price;
+        public static decimal selected_ware_tax;
+        public static decimal selected_ware_quantity;
         public static int selected_ware_id;
 
         public WareForm()
@@ -67,13 +67,20 @@ namespace KMZ_soft
         }
         private void WareDeleteBTN_Click(object sender, EventArgs e)
         {
-                   
+            if (data_datagrid() == 0)
+            {
+                delete_messagebox(selected_ware_id);
+            }
+            else
+            {
+                MessageBox.Show("Nie ma czego usuwać! Wyszkuja towar!");
+            }
         }
 
         private void WareModBTN_Click(object sender, EventArgs e)
         {
             
-            if(data_datagrid() == 0)
+            if (data_datagrid() == 0)
             {
                 Form ware_mod_form = new Ware.WareModForm();
                 ware_mod_form.Show();
@@ -82,7 +89,7 @@ namespace KMZ_soft
             {
                 MessageBox.Show("Nie ma czego modyfikować! Wyszkuja towar!");
             }
-            
+
         }
 
         //metods
@@ -135,14 +142,45 @@ namespace KMZ_soft
             db_con.Close();
         }
 
-    
+        private void delete_messagebox(int id_ware)
+        {
+            var mb_result = MessageBox.Show("Czy napewno chcesz usunąć " + selected_ware_name + " ?", "Powiadomienie", MessageBoxButtons.YesNo);
 
-        private void ware_delete(int ware_id)
+            if (mb_result == DialogResult.Yes)
+            {
+                ware_delete(id_ware);
+                MessageBox.Show("Usunięto Towar!");
+
+
+            }
+            else
+                MessageBox.Show("Błąd usuwania!");
+        }
+
+        private int ware_delete(int ware_id)
         {
 
+            db_con.Open();
+
+
+            SqlCommand cmd_delete = new SqlCommand("ware_delete", db_con);
+            cmd_delete.CommandType = CommandType.StoredProcedure;
+
+            cmd_delete.Parameters.AddWithValue("@id_ware", SqlDbType.NVarChar).Value = ware_id;
+            cmd_delete.Parameters.AddWithValue("@result", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            cmd_delete.ExecuteNonQuery();
+
+            int delete_result = (int)cmd_delete.Parameters["@result"].Value;
+
+            db_con.Close();
+
+            return delete_result;
         }
+
         private int ware_id(string ware_name)
         {
+            db_con.Open();
 
             SqlCommand cmd_ware_search = new SqlCommand("ware_id", db_con);
 
@@ -155,6 +193,8 @@ namespace KMZ_soft
 
             int ware_id_result = (int)cmd_ware_search.Parameters["@ware_id"].Value;
 
+            db_con.Close();
+
             return ware_id_result;
         }
         private int data_datagrid()
@@ -162,17 +202,26 @@ namespace KMZ_soft
             int error;
             try
             {
-                string ware_name = (string)WareSearchDG.SelectedCells[0].Value;
-
-                selected_ware_name = (string)WareSearchDG.SelectedCells[0].Value; ;
-                selected_ware_category = (string)WareSearchDG.SelectedCells[1].Value;
-                selected_ware_price = (double)WareSearchDG.SelectedCells[2].Value;
-                selected_ware_tax = (int)WareSearchDG.SelectedCells[3].Value;
-                selected_ware_quantity = (int)WareSearchDG.SelectedCells[4].Value;
-                selected_ware_id = ware_id(ware_name);
 
 
-                error = 0;
+                var ware_name = (string)WareSearchDG.SelectedCells[0].Value; 
+                var ware_category = (string)WareSearchDG.SelectedCells[1].Value;
+                var ware_price = (decimal)WareSearchDG.SelectedCells[2].Value;
+                var ware_tax = (decimal)WareSearchDG.SelectedCells[3].Value;
+                var ware_quantity = (decimal)WareSearchDG.SelectedCells[4].Value;
+
+                selected_ware_name = ware_name;
+                selected_ware_price = ware_price;
+                selected_ware_quantity = ware_quantity;
+                selected_ware_tax = ware_tax;
+                selected_ware_category = ware_category;
+
+                selected_ware_id = ware_id(selected_ware_name);
+
+                
+
+
+            error = 0;
             }
             catch (Exception e)
             {
