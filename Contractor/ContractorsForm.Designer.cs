@@ -72,6 +72,7 @@ namespace KMZ_soft
             this.ContractorModBTN.TabIndex = 6;
             this.ContractorModBTN.Text = "Modyfikuj kontrahenta";
             this.ContractorModBTN.UseVisualStyleBackColor = true;
+            this.ContractorModBTN.Click += new System.EventHandler(this.ContractorModBTN_Click);
             // 
             // ContractorDeleteBTN
             // 
@@ -81,6 +82,7 @@ namespace KMZ_soft
             this.ContractorDeleteBTN.TabIndex = 7;
             this.ContractorDeleteBTN.Text = "Usuń kontrahenta";
             this.ContractorDeleteBTN.UseVisualStyleBackColor = true;
+            this.ContractorDeleteBTN.Click += new System.EventHandler(this.ContractorDeleteBTN_Click);
             // 
             // ContractorAddBTN
             // 
@@ -90,6 +92,7 @@ namespace KMZ_soft
             this.ContractorAddBTN.TabIndex = 8;
             this.ContractorAddBTN.Text = "Dodaj kontrahenta";
             this.ContractorAddBTN.UseVisualStyleBackColor = true;
+            this.ContractorAddBTN.Click += new System.EventHandler(this.ContractorAddBTN_Click);
             // 
             // ContractorSearchBTN
             // 
@@ -99,6 +102,7 @@ namespace KMZ_soft
             this.ContractorSearchBTN.TabIndex = 9;
             this.ContractorSearchBTN.Text = "Wyszukaj";
             this.ContractorSearchBTN.UseVisualStyleBackColor = true;
+            this.ContractorSearchBTN.Click += new System.EventHandler(this.ContractorSearchBTN_Click);
             // 
             // ContractorSearchDG
             // 
