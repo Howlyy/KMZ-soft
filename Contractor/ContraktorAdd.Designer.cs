@@ -39,12 +39,21 @@ namespace KMZ_soft.Contractor
             label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(26, 35);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(109, 15);
+            label1.TabIndex = 19;
+            label1.Text = "Nazwa kontrahenta";
+            // 
             // ContractorAddAddressTB
             // 
             this.ContractorAddAddressTB.Location = new System.Drawing.Point(143, 90);
             this.ContractorAddAddressTB.Name = "ContractorAddAddressTB";
             this.ContractorAddAddressTB.Size = new System.Drawing.Size(151, 23);
-            this.ContractorAddAddressTB.TabIndex = 11;
+            this.ContractorAddAddressTB.TabIndex = 3;
             // 
             // label3
             // 
@@ -58,9 +67,10 @@ namespace KMZ_soft.Contractor
             // ContractorAddNipTB
             // 
             this.ContractorAddNipTB.Location = new System.Drawing.Point(143, 61);
+            this.ContractorAddNipTB.MaxLength = 11;
             this.ContractorAddNipTB.Name = "ContractorAddNipTB";
             this.ContractorAddNipTB.Size = new System.Drawing.Size(151, 23);
-            this.ContractorAddNipTB.TabIndex = 10;
+            this.ContractorAddNipTB.TabIndex = 2;
             // 
             // label2
             // 
@@ -78,23 +88,15 @@ namespace KMZ_soft.Contractor
             this.ContractorAddNameTB.Size = new System.Drawing.Size(151, 23);
             this.ContractorAddNameTB.TabIndex = 1;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(26, 35);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(109, 15);
-            label1.TabIndex = 19;
-            label1.Text = "Nazwa kontrahenta";
-            // 
             // ContractorAddBTN
             // 
             this.ContractorAddBTN.Location = new System.Drawing.Point(81, 136);
             this.ContractorAddBTN.Name = "ContractorAddBTN";
             this.ContractorAddBTN.Size = new System.Drawing.Size(147, 59);
-            this.ContractorAddBTN.TabIndex = 17;
+            this.ContractorAddBTN.TabIndex = 4;
             this.ContractorAddBTN.Text = "Dodaj";
             this.ContractorAddBTN.UseVisualStyleBackColor = true;
+            this.ContractorAddBTN.Click += new System.EventHandler(this.ContractorAddBTN_Click);
             // 
             // ContraktorAdd
             // 

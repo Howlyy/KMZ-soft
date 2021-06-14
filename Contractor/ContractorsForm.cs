@@ -65,7 +65,7 @@ namespace KMZ_soft
         {
             if (data_datagrid() == 0)
             {
-                delete_messagebox(selected_contractor_id);
+                delete_messagebox(selected_contractor_id, selected_contractor_name);
             }
             else
             {
@@ -77,8 +77,8 @@ namespace KMZ_soft
         {
             if (data_datagrid() == 0)
             {
-                Form ware_mod_form = new Ware.WareModForm();
-                ware_mod_form.Show();
+                Form contractor_form = new Contractor.ContractorMod();
+                contractor_form.Show();
             }
             else
             {
@@ -134,9 +134,9 @@ namespace KMZ_soft
             db_con.Close();
         }
 
-        private void delete_messagebox(int contractor_id)
+        private void delete_messagebox(int contractor_id, string name)
         {
-            var mb_result = MessageBox.Show("Czy napewno chcesz usunąć " + selected_contractor_name + " ?", "Powiadomienie", MessageBoxButtons.YesNo);
+            var mb_result = MessageBox.Show("Czy napewno chcesz usunąć " + name + " ?", "Powiadomienie", MessageBoxButtons.YesNo);
 
             if (mb_result == DialogResult.Yes)
             {
@@ -178,8 +178,8 @@ namespace KMZ_soft
 
             cmd_contractor_search.CommandType = CommandType.StoredProcedure;
 
-            cmd_contractor_search.Parameters.AddWithValue("@nip", SqlDbType.NVarChar).Value = contractor_nip;
-            cmd_contractor_search.Parameters.AddWithValue("@contractor_id", SqlDbType.NVarChar).Direction = ParameterDirection.Output;
+            cmd_contractor_search.Parameters.AddWithValue("@nip", SqlDbType.Char).Value = contractor_nip;
+            cmd_contractor_search.Parameters.AddWithValue("@contractor_id", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             cmd_contractor_search.ExecuteNonQuery();
 
@@ -193,8 +193,7 @@ namespace KMZ_soft
         private int data_datagrid()
         {
             int error;
-            try
-            {
+            
 
 
                 var contractor_name = (string)ContractorSearchDG.SelectedCells[0].Value;
@@ -206,16 +205,11 @@ namespace KMZ_soft
                 selected_contractor_nip = contractor_nip;
                 selected_contractor_address = contractor_address;
 
-                selected_contractor_id = contractor_id(selected_contractor_name);
+                selected_contractor_id = contractor_id(selected_contractor_nip);
 
 
                 error = 0;
-            }
-            catch (Exception e)
-            {
-
-                error = 1;
-            }
+            
 
             return error;
         }

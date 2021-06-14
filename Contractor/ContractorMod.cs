@@ -19,18 +19,20 @@ namespace KMZ_soft.Contractor
             InitializeComponent();
             db_con = new SqlConnection(ConfigurationManager.ConnectionStrings["KMZdb"].ConnectionString);
 
-            
+            ContractorModNameTB.Text = ContractorsForm.selected_contractor_name;
+            ContractorModNipTB.Text = ContractorsForm.selected_contractor_nip;
+            ContractorModAddressTB.Text = ContractorsForm.selected_contractor_address;
+
         }
 
         private void ContractorModBTN_Click(object sender, EventArgs e)
         {
-            string ware_name = WareForm.selected_ware_name;
-            string ware_category = WareForm.selected_ware_category;
-            decimal ware_price = WareForm.selected_ware_price;
-            decimal ware_tax = WareForm.selected_ware_tax;
-            decimal ware_quantity = WareForm.selected_ware_quantity;
+            string cont_name = ContractorModNameTB.Text;
+            string cont_nip = ContractorModNipTB.Text;
+            string cont_address = ContractorModAddressTB.Text;
+            int cont_id = ContractorsForm.selected_contractor_id;
 
-            mod_messagebox(ware_name, ware_category, ware_price, ware_tax, ware_quantity);
+            contractor_mod_messagebox(cont_name, cont_nip, cont_address, cont_id);
         }
 
         
@@ -39,17 +41,17 @@ namespace KMZ_soft.Contractor
 
     
 
-        private void mod_messagebox(string ware_name_mb, string category_mb, decimal price_mb, decimal tax_mb, decimal quantity_mb)
+        private void contractor_mod_messagebox(string name, string nip, string address, int id)
         {
-            var mb_result = MessageBox.Show("Czy napewno chcesz modyfikować " + WareForm.selected_ware_name + " ?", "Powiadomienie", MessageBoxButtons.YesNo);
+            var mb_result = MessageBox.Show("Czy napewno chcesz modyfikować " + name + " ?", "Powiadomienie", MessageBoxButtons.YesNo);
 
             if (mb_result == DialogResult.Yes)
             {
 
 
-                if (ware_mod(ware_name_mb, category_mb, price_mb, tax_mb, quantity_mb) == 1)
+                if (contractor_mod(name, nip, address, id) == 1)
                 {
-                    MessageBox.Show("Zmodyfikowano towar!");
+                    MessageBox.Show("Zmodyfikowano kontrahenta!");
                     Hide();
                 }
                 else
@@ -65,28 +67,26 @@ namespace KMZ_soft.Contractor
 
         }
 
-        private int ware_mod(string ware_name, string category, decimal price, decimal tax, decimal quantity)
+        private int contractor_mod(string name, string nip, string address, int id)
         {
 
 
             db_con.Open();
 
-            SqlCommand cmd_ware_mod = new SqlCommand("ware_modyfi", db_con);
+            SqlCommand cmd_cont_mod = new SqlCommand("contractor_modify", db_con);
 
-            cmd_ware_mod.CommandType = CommandType.StoredProcedure;
+            cmd_cont_mod.CommandType = CommandType.StoredProcedure;
 
-            cmd_ware_mod.Parameters.AddWithValue("@ware_name", SqlDbType.NVarChar).Value = ware_name;
-            cmd_ware_mod.Parameters.AddWithValue("@price", SqlDbType.Decimal).Value = price;
-            cmd_ware_mod.Parameters.AddWithValue("@tax", SqlDbType.Decimal).Value = tax;
-            cmd_ware_mod.Parameters.AddWithValue("@category", SqlDbType.NVarChar).Value = category;
-            cmd_ware_mod.Parameters.AddWithValue("@quantity", SqlDbType.Decimal).Value = quantity;
-            cmd_ware_mod.Parameters.AddWithValue("@id_ware", SqlDbType.Int).Value = WareForm.selected_ware_id;
-            cmd_ware_mod.Parameters.AddWithValue("@id_user", SqlDbType.Int).Value = KMZsoft.LoggerUserId;
-            cmd_ware_mod.Parameters.AddWithValue("@result", SqlDbType.NVarChar).Direction = ParameterDirection.Output;
+            cmd_cont_mod.Parameters.AddWithValue("@name", SqlDbType.NVarChar).Value = name;
+            cmd_cont_mod.Parameters.AddWithValue("@nip", SqlDbType.Char).Value = nip;
+            cmd_cont_mod.Parameters.AddWithValue("@address", SqlDbType.NVarChar).Value = address;
+            cmd_cont_mod.Parameters.AddWithValue("@id_contractor", SqlDbType.Int).Value = id;
+            cmd_cont_mod.Parameters.AddWithValue("@id_user", SqlDbType.Int).Value = KMZsoft.LoggerUserId;
+            cmd_cont_mod.Parameters.AddWithValue("@result", SqlDbType.NVarChar).Direction = ParameterDirection.Output;
 
-            cmd_ware_mod.ExecuteNonQuery();
+            cmd_cont_mod.ExecuteNonQuery();
 
-            int mod_result = (int)cmd_ware_mod.Parameters["@result"].Value;
+            int mod_result = (int)cmd_cont_mod.Parameters["@result"].Value;
 
 
             db_con.Close();
