@@ -29,6 +29,7 @@ namespace KMZ_soft
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SellForm));
             this.SellSearchCB = new System.Windows.Forms.ComboBox();
             this.SellSearchTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,10 +41,19 @@ namespace KMZ_soft
             this.SellNettoTB = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.SellBruttoTB = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.SellReceiptBTN = new System.Windows.Forms.Button();
+            this.SellInvoiceBTN = new System.Windows.Forms.Button();
             this.SellWareRemoveBTN = new System.Windows.Forms.Button();
-            this.SellWareModQBTN = new System.Windows.Forms.Button();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.Receipt_print = new System.Drawing.Printing.PrintDocument();
+            this.SellQuantityTB = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.printPreviewDialog2 = new System.Windows.Forms.PrintPreviewDialog();
+            this.Invoice_print = new System.Drawing.Printing.PrintDocument();
+            this.label5 = new System.Windows.Forms.Label();
+            this.AddContractorInvoiceTB = new System.Windows.Forms.TextBox();
+            this.InvoiceContrBTN = new System.Windows.Forms.Button();
+            this.refreshContractorBTN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SellTransactionDG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SellWareDG)).BeginInit();
             this.SuspendLayout();
@@ -51,6 +61,9 @@ namespace KMZ_soft
             // SellSearchCB
             // 
             this.SellSearchCB.FormattingEnabled = true;
+            this.SellSearchCB.Items.AddRange(new object[] {
+            "Nazwa towaru",
+            "Kategoria"});
             this.SellSearchCB.Location = new System.Drawing.Point(209, 31);
             this.SellSearchCB.Name = "SellSearchCB";
             this.SellSearchCB.Size = new System.Drawing.Size(134, 23);
@@ -102,7 +115,7 @@ namespace KMZ_soft
             // 
             // SellWareAddBTN
             // 
-            this.SellWareAddBTN.Location = new System.Drawing.Point(671, 211);
+            this.SellWareAddBTN.Location = new System.Drawing.Point(658, 206);
             this.SellWareAddBTN.Name = "SellWareAddBTN";
             this.SellWareAddBTN.Size = new System.Drawing.Size(44, 30);
             this.SellWareAddBTN.TabIndex = 9;
@@ -144,27 +157,29 @@ namespace KMZ_soft
             this.SellBruttoTB.Size = new System.Drawing.Size(100, 23);
             this.SellBruttoTB.TabIndex = 14;
             // 
-            // button4
+            // SellReceiptBTN
             // 
-            this.button4.Location = new System.Drawing.Point(470, 501);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(125, 30);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "button1";
-            this.button4.UseVisualStyleBackColor = true;
+            this.SellReceiptBTN.Location = new System.Drawing.Point(611, 500);
+            this.SellReceiptBTN.Name = "SellReceiptBTN";
+            this.SellReceiptBTN.Size = new System.Drawing.Size(125, 51);
+            this.SellReceiptBTN.TabIndex = 9;
+            this.SellReceiptBTN.Text = "Zapłać i wystaw paragon";
+            this.SellReceiptBTN.UseVisualStyleBackColor = true;
+            this.SellReceiptBTN.Click += new System.EventHandler(this.SellReceiptBTN_Click);
             // 
-            // button5
+            // SellInvoiceBTN
             // 
-            this.button5.Location = new System.Drawing.Point(611, 501);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(125, 30);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "button1";
-            this.button5.UseVisualStyleBackColor = true;
+            this.SellInvoiceBTN.Location = new System.Drawing.Point(448, 500);
+            this.SellInvoiceBTN.Name = "SellInvoiceBTN";
+            this.SellInvoiceBTN.Size = new System.Drawing.Size(125, 51);
+            this.SellInvoiceBTN.TabIndex = 9;
+            this.SellInvoiceBTN.Text = "Zapłać i wystaw fakture";
+            this.SellInvoiceBTN.UseVisualStyleBackColor = true;
+            this.SellInvoiceBTN.Click += new System.EventHandler(this.SellInvoiceBTN_Click);
             // 
             // SellWareRemoveBTN
             // 
-            this.SellWareRemoveBTN.Location = new System.Drawing.Point(54, 444);
+            this.SellWareRemoveBTN.Location = new System.Drawing.Point(163, 444);
             this.SellWareRemoveBTN.Name = "SellWareRemoveBTN";
             this.SellWareRemoveBTN.Size = new System.Drawing.Size(125, 30);
             this.SellWareRemoveBTN.TabIndex = 9;
@@ -172,21 +187,101 @@ namespace KMZ_soft
             this.SellWareRemoveBTN.UseVisualStyleBackColor = true;
             this.SellWareRemoveBTN.Click += new System.EventHandler(this.SellWareRemoveBTN_Click);
             // 
-            // SellWareModQBTN
+            // printPreviewDialog1
             // 
-            this.SellWareModQBTN.Location = new System.Drawing.Point(195, 444);
-            this.SellWareModQBTN.Name = "SellWareModQBTN";
-            this.SellWareModQBTN.Size = new System.Drawing.Size(125, 30);
-            this.SellWareModQBTN.TabIndex = 9;
-            this.SellWareModQBTN.Text = "MOD";
-            this.SellWareModQBTN.UseVisualStyleBackColor = true;
-            this.SellWareModQBTN.Click += new System.EventHandler(this.SellWareModQBTN_Click);
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
+            this.printPreviewDialog1.Click += new System.EventHandler(this.SellReceiptBTN_Click);
+            // 
+            // Receipt_print
+            // 
+            this.Receipt_print.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.Receipt_print_PrintPage);
+            // 
+            // SellQuantityTB
+            // 
+            this.SellQuantityTB.Location = new System.Drawing.Point(541, 211);
+            this.SellQuantityTB.Name = "SellQuantityTB";
+            this.SellQuantityTB.Size = new System.Drawing.Size(85, 23);
+            this.SellQuantityTB.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(342, 214);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(184, 15);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Podaj ilość zaznaczonego towaru:";
+            // 
+            // printPreviewDialog2
+            // 
+            this.printPreviewDialog2.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog2.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog2.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog2.Enabled = true;
+            this.printPreviewDialog2.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog2.Icon")));
+            this.printPreviewDialog2.Name = "printPreviewDialog2";
+            this.printPreviewDialog2.Visible = false;
+            this.printPreviewDialog2.Click += new System.EventHandler(this.SellInvoiceBTN_Click);
+            // 
+            // Invoice_print
+            // 
+            this.Invoice_print.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.Invoice_print_PrintPage);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(125, 497);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(253, 15);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Uzupełnij kontrahenta jeżeli wystawiasz fakturę";
+            // 
+            // AddContractorInvoiceTB
+            // 
+            this.AddContractorInvoiceTB.Location = new System.Drawing.Point(125, 515);
+            this.AddContractorInvoiceTB.Name = "AddContractorInvoiceTB";
+            this.AddContractorInvoiceTB.Size = new System.Drawing.Size(197, 23);
+            this.AddContractorInvoiceTB.TabIndex = 18;
+            this.AddContractorInvoiceTB.TextChanged += new System.EventHandler(this.AddContractorInvoiceTB_TextChanged);
+            // 
+            // InvoiceContrBTN
+            // 
+            this.InvoiceContrBTN.Location = new System.Drawing.Point(328, 515);
+            this.InvoiceContrBTN.Name = "InvoiceContrBTN";
+            this.InvoiceContrBTN.Size = new System.Drawing.Size(39, 25);
+            this.InvoiceContrBTN.TabIndex = 19;
+            this.InvoiceContrBTN.Text = "+";
+            this.InvoiceContrBTN.UseVisualStyleBackColor = true;
+            this.InvoiceContrBTN.Click += new System.EventHandler(this.InvoiceContrBTN_Click);
+            // 
+            // refreshContractorBTN
+            // 
+            this.refreshContractorBTN.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.refreshContractorBTN.Location = new System.Drawing.Point(373, 515);
+            this.refreshContractorBTN.Name = "refreshContractorBTN";
+            this.refreshContractorBTN.Size = new System.Drawing.Size(62, 25);
+            this.refreshContractorBTN.TabIndex = 20;
+            this.refreshContractorBTN.Text = "Odśwież";
+            this.refreshContractorBTN.UseVisualStyleBackColor = true;
+            this.refreshContractorBTN.Click += new System.EventHandler(this.refreshContractorBTN_Click);
             // 
             // SellForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 564);
+            this.ClientSize = new System.Drawing.Size(821, 564);
+            this.Controls.Add(this.refreshContractorBTN);
+            this.Controls.Add(this.InvoiceContrBTN);
+            this.Controls.Add(this.AddContractorInvoiceTB);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.SellQuantityTB);
             this.Controls.Add(this.SellBruttoTB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.SellNettoTB);
@@ -194,16 +289,14 @@ namespace KMZ_soft
             this.Controls.Add(this.SellSearchCB);
             this.Controls.Add(this.SellSearchTB);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.SellWareModQBTN);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.SellInvoiceBTN);
             this.Controls.Add(this.SellWareRemoveBTN);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.SellReceiptBTN);
             this.Controls.Add(this.SellWareAddBTN);
             this.Controls.Add(this.SellSearchBTN);
             this.Controls.Add(this.SellWareDG);
             this.Controls.Add(this.SellTransactionDG);
             this.Name = "SellForm";
-            this.Text = "SellForm";
             ((System.ComponentModel.ISupportInitialize)(this.SellTransactionDG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SellWareDG)).EndInit();
             this.ResumeLayout(false);
@@ -217,16 +310,25 @@ namespace KMZ_soft
         private System.Windows.Forms.TextBox SellSearchTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button SellSearchBTN;
-        private System.Windows.Forms.DataGridView SellTransactionDG;
         private System.Windows.Forms.DataGridView SellWareDG;
         private System.Windows.Forms.Button SellWareAddBTN;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox SellNettoTB;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox SellBruttoTB;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button SellReceiptBTN;
+        private System.Windows.Forms.Button SellInvoiceBTN;
         private System.Windows.Forms.Button SellWareRemoveBTN;
-        private System.Windows.Forms.Button SellWareModQBTN;
+        public  System.Windows.Forms.DataGridView SellTransactionDG;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Drawing.Printing.PrintDocument Receipt_print;
+        private System.Windows.Forms.TextBox SellQuantityTB;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog2;
+        private System.Drawing.Printing.PrintDocument Invoice_print;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox AddContractorInvoiceTB;
+        private System.Windows.Forms.Button InvoiceContrBTN;
+        private System.Windows.Forms.Button refreshContractorBTN;
     }
 }

@@ -37,6 +37,7 @@ namespace KMZ_soft
             this.ContractorAddBTN = new System.Windows.Forms.Button();
             this.ContractorSearchBTN = new System.Windows.Forms.Button();
             this.ContractorSearchDG = new System.Windows.Forms.DataGridView();
+            this.InvoiceContractorBTN = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ContractorSearchDG)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,7 +67,7 @@ namespace KMZ_soft
             // 
             // ContractorModBTN
             // 
-            this.ContractorModBTN.Location = new System.Drawing.Point(511, 395);
+            this.ContractorModBTN.Location = new System.Drawing.Point(438, 395);
             this.ContractorModBTN.Name = "ContractorModBTN";
             this.ContractorModBTN.Size = new System.Drawing.Size(125, 43);
             this.ContractorModBTN.TabIndex = 6;
@@ -76,7 +77,7 @@ namespace KMZ_soft
             // 
             // ContractorDeleteBTN
             // 
-            this.ContractorDeleteBTN.Location = new System.Drawing.Point(348, 395);
+            this.ContractorDeleteBTN.Location = new System.Drawing.Point(275, 395);
             this.ContractorDeleteBTN.Name = "ContractorDeleteBTN";
             this.ContractorDeleteBTN.Size = new System.Drawing.Size(125, 43);
             this.ContractorDeleteBTN.TabIndex = 7;
@@ -86,7 +87,7 @@ namespace KMZ_soft
             // 
             // ContractorAddBTN
             // 
-            this.ContractorAddBTN.Location = new System.Drawing.Point(178, 395);
+            this.ContractorAddBTN.Location = new System.Drawing.Point(105, 395);
             this.ContractorAddBTN.Name = "ContractorAddBTN";
             this.ContractorAddBTN.Size = new System.Drawing.Size(125, 43);
             this.ContractorAddBTN.TabIndex = 8;
@@ -113,11 +114,22 @@ namespace KMZ_soft
             this.ContractorSearchDG.Size = new System.Drawing.Size(682, 290);
             this.ContractorSearchDG.TabIndex = 5;
             // 
+            // InvoiceContractorBTN
+            // 
+            this.InvoiceContractorBTN.Location = new System.Drawing.Point(592, 395);
+            this.InvoiceContractorBTN.Name = "InvoiceContractorBTN";
+            this.InvoiceContractorBTN.Size = new System.Drawing.Size(113, 43);
+            this.InvoiceContractorBTN.TabIndex = 13;
+            this.InvoiceContractorBTN.Text = "Wybierz do faktury";
+            this.InvoiceContractorBTN.UseVisualStyleBackColor = true;
+            this.InvoiceContractorBTN.Click += new System.EventHandler(this.InvoiceContractorBTN_Click);
+            // 
             // ContractorsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.InvoiceContractorBTN);
             this.Controls.Add(this.ContractorSearchCB);
             this.Controls.Add(this.ContractorSearchTB);
             this.Controls.Add(this.label1);
@@ -144,5 +156,6 @@ namespace KMZ_soft
         private System.Windows.Forms.Button ContractorAddBTN;
         private System.Windows.Forms.DataGridView ContractorSearchDG;
         public System.Windows.Forms.Button ContractorSearchBTN;
+        private System.Windows.Forms.Button InvoiceContractorBTN;
     }
 }

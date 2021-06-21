@@ -19,6 +19,11 @@ namespace KMZ_soft
         public static string selected_contractor_nip;
         public static string selected_contractor_address;
         public static int selected_contractor_id;
+
+        public static string invoice_contractor_name;
+        public static string invoice_contractor_nip;
+        public static string invoice_contractor_address;
+        public static int invoice_contractor_id;
         public ContractorsForm()
         {
 
@@ -178,6 +183,7 @@ namespace KMZ_soft
 
             cmd_contractor_search.CommandType = CommandType.StoredProcedure;
 
+
             cmd_contractor_search.Parameters.AddWithValue("@nip", SqlDbType.Char).Value = contractor_nip;
             cmd_contractor_search.Parameters.AddWithValue("@contractor_id", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -193,13 +199,14 @@ namespace KMZ_soft
         private int data_datagrid()
         {
             int error;
-            
 
 
+            try
+            {
                 var contractor_name = (string)ContractorSearchDG.SelectedCells[0].Value;
                 var contractor_nip = (string)ContractorSearchDG.SelectedCells[1].Value;
                 var contractor_address = (string)ContractorSearchDG.SelectedCells[2].Value;
-                
+
 
                 selected_contractor_name = contractor_name;
                 selected_contractor_nip = contractor_nip;
@@ -209,10 +216,29 @@ namespace KMZ_soft
 
 
                 error = 0;
-            
+            }
+            catch
+            {
+                error = 1;
+            }
 
             return error;
         }
 
+        private void InvoiceContractorBTN_Click(object sender, EventArgs e)
+        {
+            var contractor_name = (string)ContractorSearchDG.SelectedCells[0].Value;
+            var contractor_nip = (string)ContractorSearchDG.SelectedCells[1].Value;
+            var contractor_address = (string)ContractorSearchDG.SelectedCells[2].Value;
+
+
+            invoice_contractor_name = contractor_name;
+            invoice_contractor_nip = contractor_nip;
+            invoice_contractor_address = contractor_address;
+
+            invoice_contractor_id = contractor_id(invoice_contractor_nip);
+
+            Hide();
+        }
     }
 }
