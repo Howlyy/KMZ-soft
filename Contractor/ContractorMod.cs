@@ -24,7 +24,11 @@ namespace KMZ_soft.Contractor
             ContractorModAddressTB.Text = ContractorsForm.selected_contractor_address;
 
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku Modyfikuj kontrahenta. Wywołuje metode contractor_mod_messagebox(string name, string nip, string address, int id)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContractorModBTN_Click(object sender, EventArgs e)
         {
             string cont_name = ContractorModNameTB.Text;
@@ -35,12 +39,13 @@ namespace KMZ_soft.Contractor
             contractor_mod_messagebox(cont_name, cont_nip, cont_address, cont_id);
         }
 
-        
-        
-        
-
-    
-
+        /// <summary>
+        /// Metoda otwierająca MessageBoxa Yes/No. Jeżeli yes to wywołaj metode contractor_mod(string name, string nip, string address, int id)
+        /// </summary>
+        /// <param name="name">nazwa kontrahenta</param>
+        /// <param name="nip">nip</param>
+        /// <param name="address">adres</param>
+        /// <param name="id">id kontrahenta</param>
         private void contractor_mod_messagebox(string name, string nip, string address, int id)
         {
             var mb_result = MessageBox.Show("Czy napewno chcesz modyfikować " + name + " ?", "Powiadomienie", MessageBoxButtons.YesNo);
@@ -66,7 +71,14 @@ namespace KMZ_soft.Contractor
 
 
         }
-
+        /// <summary>
+        /// Metoda wywołujaca procedure SQL contractor_modify
+        /// </summary>
+        /// <param name="name">nazwa kontrahenta</param>
+        /// <param name="nip">nip</param>
+        /// <param name="address">adres</param>
+        /// <param name="id">id kontrahenta</param>
+        /// <returns>1 - zmodyfikowan 666- nie zmodyfikowano</returns>
         private int contractor_mod(string name, string nip, string address, int id)
         {
 

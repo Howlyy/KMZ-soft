@@ -38,7 +38,11 @@ namespace KMZ_soft
                 WareAddBTN.Visible = false;
             }
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku Wyszukaj. Wywołuje metode ware_search(string combo, string text, int id_user)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WareSearchBTN_Click(object sender, EventArgs e)
         {
             string search_combo = WareSearchCB.Text;
@@ -57,7 +61,11 @@ namespace KMZ_soft
 
            
         }
-       
+        /// <summary>
+        /// Metoda użycia przycisku dodaj towar. Otwiera Form Ware.WareAddForm();
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WareAddBTN_Click(object sender, EventArgs e)
         {
             
@@ -65,6 +73,11 @@ namespace KMZ_soft
             ware_add_form.Show();
             
         }
+        /// <summary>
+        /// Metoda użycia przycisku usuń towar.wywołuje metody data_datagrid() jezeli jest 0 to delete_messagebox(selected_ware_id)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WareDeleteBTN_Click(object sender, EventArgs e)
         {
             if (data_datagrid() == 0)
@@ -76,7 +89,11 @@ namespace KMZ_soft
                 MessageBox.Show("Nie ma czego usuwać! Wyszkuja towar!");
             }
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku modyfikuj towar. wywołuje metody data_datagrid() jezeli jest 0 to otwiera Ware.WareModForm()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WareModBTN_Click(object sender, EventArgs e)
         {
             
@@ -94,6 +111,12 @@ namespace KMZ_soft
 
         //metods
 
+        /// <summary>
+        /// Metoda wywołująca procedury SQL ware_search_view lub ware_search_view_all bazująca na wartości combo
+        /// </summary>
+        /// <param name="combo"></param>
+        /// <param name="text"></param>
+        /// <param name="id_user"></param>
         private void ware_search(string combo, string text, int id_user)
         {
             DataTable search_dg = new DataTable(); 
@@ -141,7 +164,10 @@ namespace KMZ_soft
 
             db_con.Close();
         }
-
+        /// <summary>
+        /// Metoda wywołująca MessageBox Yes/No. Jezeli Yes to wywołuje metode ware_delete(id_ware);
+        /// </summary>
+        /// <param name="id_ware">int id towaru</param>
         private void delete_messagebox(int id_ware)
         {
             var mb_result = MessageBox.Show("Czy napewno chcesz usunąć " + selected_ware_name + " ?", "Powiadomienie", MessageBoxButtons.YesNo);
@@ -156,7 +182,11 @@ namespace KMZ_soft
             else
                 MessageBox.Show("Błąd usuwania!");
         }
-
+        /// <summary>
+        /// Metoda wywołująca procedure SQL ware_delete
+        /// </summary>
+        /// <param name="ware_id">int id towaru</param>
+        /// <returns>1 - przeszlo 666- nie przeszło</returns>
         private int ware_delete(int ware_id)
         {
 
@@ -177,7 +207,11 @@ namespace KMZ_soft
 
             return delete_result;
         }
-
+        /// <summary>
+        /// Metoda wywołująca procedurę SQL ware_id
+        /// </summary>
+        /// <param name="ware_name">string nazwa towaru</param>
+        /// <returns></returns>
         private int ware_id(string ware_name)
         {
             db_con.Open();
@@ -197,6 +231,10 @@ namespace KMZ_soft
 
             return ware_id_result;
         }
+        /// <summary>
+        /// Metoda przypisująca do zmienych public wartości wybranego wiersza na datagridzie WareSearchDG
+        /// </summary>
+        /// <returns>0- ok, 1 - error</returns>
         private int data_datagrid()
         {
             int error;

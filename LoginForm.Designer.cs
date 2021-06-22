@@ -83,7 +83,7 @@ namespace KMZ_soft
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 189);
+            this.ClientSize = new System.Drawing.Size(343, 189);
             this.Controls.Add(this.LoginBTN);
             this.Controls.Add(this.LoginPassLB);
             this.Controls.Add(this.label1);

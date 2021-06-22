@@ -39,7 +39,11 @@ namespace KMZ_soft
                 ContractorAddBTN.Visible = false;
             }
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku wyszukaj. Wywołuje metode contractor_search(string combo, string text, int id_user)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContractorSearchBTN_Click(object sender, EventArgs e)
         {
             string search_combo = ContractorSearchCB.Text;
@@ -59,13 +63,21 @@ namespace KMZ_soft
 
 
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku dodaj kontrahenta. Otwiera Contractor.ContraktorAdd();
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContractorAddBTN_Click(object sender, EventArgs e)
         {
             Form contractor_add_form = new Contractor.ContraktorAdd();
             contractor_add_form.Show();
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku usuń kontrahenta. Wywołuje metody data_datagrid() jeżeli 0 to delete_messagebox(int contractor_id, string name)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContractorDeleteBTN_Click(object sender, EventArgs e)
         {
             if (data_datagrid() == 0)
@@ -77,7 +89,11 @@ namespace KMZ_soft
                 MessageBox.Show("Nie ma czego usuwać! Wyszkuja Kontrahenta!");
             }
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku modyfikuj kontrahenta. Wywołuje metody data_datagrid() jeżeli 0 to otwiera Contractor.ContractorMod();
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContractorModBTN_Click(object sender, EventArgs e)
         {
             if (data_datagrid() == 0)
@@ -90,7 +106,12 @@ namespace KMZ_soft
                 MessageBox.Show("Nie ma czego modyfikować! Wyszkuja towar!");
             }
         }
-
+        /// <summary>
+        /// Metoda wywołująca procedury SQL contractor_search_view_all lub contractor_search_view w zależności od wartośći combo
+        /// </summary>
+        /// <param name="combo">wartość z ComboBoxa</param>
+        /// <param name="text">wartość z TextBox</param>
+        /// <param name="id_user">id usera</param>
         private void contractor_search(string combo, string text, int id_user)
         {
             DataTable search_dg = new DataTable();
@@ -138,7 +159,11 @@ namespace KMZ_soft
 
             db_con.Close();
         }
-
+        /// <summary>
+        /// Metoda otwierająca Messageboxa Yes/No. Jeżeli tak to wywołuje metode contractor_delete(contractor_id);
+        /// </summary>
+        /// <param name="contractor_id"></param>
+        /// <param name="name"></param>
         private void delete_messagebox(int contractor_id, string name)
         {
             var mb_result = MessageBox.Show("Czy napewno chcesz usunąć " + name + " ?", "Powiadomienie", MessageBoxButtons.YesNo);
@@ -153,7 +178,11 @@ namespace KMZ_soft
             else
                 MessageBox.Show("Błąd usuwania!");
         }
-
+        /// <summary>
+        /// Metoda wywołujaca procedure SQL contractor_delete
+        /// </summary>
+        /// <param name="contractor_id">id kontrahenta</param>
+        /// <returns>1 - usunięto 666 - nie usunięto</returns>
         private int contractor_delete(int contractor_id)
         {
 
@@ -174,7 +203,11 @@ namespace KMZ_soft
 
             return delete_result;
         }
-
+        /// <summary>
+        /// Metoda wywołujaca procedure SQL contractor_id.
+        /// </summary>
+        /// <param name="contractor_nip">nip kontrahenta</param>
+        /// <returns>id kontrahenta</returns>
         private int contractor_id(string contractor_nip)
         {
             db_con.Open();
@@ -195,7 +228,10 @@ namespace KMZ_soft
 
             return contractor_id_result;
         }
-
+        /// <summary>
+        /// Metoda wpisująca do zmienych public wartości zaznaczone w datagridzie ContractorSearchDG
+        /// </summary>
+        /// <returns>0 - zaznaczono 1 - error</returns>
         private int data_datagrid()
         {
             int error;
@@ -224,7 +260,11 @@ namespace KMZ_soft
 
             return error;
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku Wybór do faktury. Dopisuje do zmiennych public z poczatkiem invoice wybrane wartości z datagrida ContractorSearchDG
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InvoiceContractorBTN_Click(object sender, EventArgs e)
         {
             var contractor_name = (string)ContractorSearchDG.SelectedCells[0].Value;

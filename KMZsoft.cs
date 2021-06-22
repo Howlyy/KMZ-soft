@@ -27,7 +27,11 @@ namespace KMZ_soft
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
         }
-
+        /// <summary>
+        /// Metoda wywo³uj¹ca procedurê SQL user_permission.
+        /// </summary>
+        /// <param name="id_user">int id usera</param>
+        /// <returns>int wartoœæ permitów</returns>
         public static int user_permissions(int id_user)
         {
             SqlConnection db_con = new SqlConnection(ConfigurationManager.ConnectionStrings["KMZdb"].ConnectionString);

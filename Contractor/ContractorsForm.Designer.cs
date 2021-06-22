@@ -44,6 +44,9 @@ namespace KMZ_soft
             // ContractorSearchCB
             // 
             this.ContractorSearchCB.FormattingEnabled = true;
+            this.ContractorSearchCB.Items.AddRange(new object[] {
+            "Nazwa kontrahenta",
+            "Nip"});
             this.ContractorSearchCB.Location = new System.Drawing.Point(298, 25);
             this.ContractorSearchCB.Name = "ContractorSearchCB";
             this.ContractorSearchCB.Size = new System.Drawing.Size(134, 23);

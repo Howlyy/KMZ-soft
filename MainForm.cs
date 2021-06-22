@@ -22,7 +22,7 @@ namespace KMZ_soft
             InitializeComponent();
             db_con = new SqlConnection(ConfigurationManager.ConnectionStrings["KMZdb"].ConnectionString);
         }
-
+        
         private void WareCMS_Opening(object sender, CancelEventArgs e)
         {
             Form ware_form = new WareForm();

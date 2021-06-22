@@ -28,18 +28,31 @@ namespace KMZ_soft.Ware
             WareModTaxTB.Text = Convert.ToString(WareForm.selected_ware_tax);
             WareModQuantityTB.Text = Convert.ToString(WareForm.selected_ware_quantity);
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku modyfikacji towaru. Wywołuje metode mod_messagebox(string ware_name_mb, string category_mb, decimal price_mb, decimal tax_mb, decimal quantity_mb)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WareModBTN_Click(object sender, EventArgs e)
         {
-            string ware_name = WareForm.selected_ware_name;
-            string ware_category = WareForm.selected_ware_category;
-            decimal ware_price = WareForm.selected_ware_price;
-            decimal ware_tax = WareForm.selected_ware_tax;
-            decimal ware_quantity = WareForm.selected_ware_quantity;
+            string ware_name = WareModNameTB.Text;
+            string ware_category = WareModCatTB.Text;
+            decimal ware_price = Convert.ToDecimal(WareModPriceTB.Text);
+            decimal ware_tax = Convert.ToDecimal(WareModTaxTB.Text);
+            decimal ware_quantity = Convert.ToDecimal(WareModQuantityTB.Text);
+
+
 
             mod_messagebox(ware_name, ware_category, ware_price, ware_tax, ware_quantity);
         }
-
+        /// <summary>
+        /// Metoda wyświetlająca MessageBoxa Yes/NO pod metodę modyfikowania towaru ware_mod(string ware_name, string category, decimal price, decimal tax, decimal quantity)
+        /// </summary>
+        /// <param name="ware_name_mb">nazwa towaru</param>
+        /// <param name="category_mb">kategoria</param>
+        /// <param name="price_mb">cena netto</param>
+        /// <param name="tax_mb">vat</param>
+        /// <param name="quantity_mb">ilość</param>
         private void mod_messagebox(string ware_name_mb, string category_mb, decimal price_mb, decimal tax_mb, decimal quantity_mb)
         {
             var mb_result = MessageBox.Show("Czy napewno chcesz modyfikować " + WareForm.selected_ware_name + " ?", "Powiadomienie", MessageBoxButtons.YesNo) ;
@@ -65,7 +78,15 @@ namespace KMZ_soft.Ware
 
 
         }
-
+        /// <summary>
+        /// Metoda wywołująca procedure SQL ware_modyfi
+        /// </summary>
+        /// <param name="ware_name">nazwa towaru</param>
+        /// <param name="category">kategoria</param>
+        /// <param name="price">cena netto</param>
+        /// <param name="tax">vat</param>
+        /// <param name="quantity">ilość</param>
+        /// <returns>1 - przeszło 666 - nie przeszło</returns>
         private int ware_mod(string ware_name, string category, decimal price, decimal tax, decimal quantity)
         {
             

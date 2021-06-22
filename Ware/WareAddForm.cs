@@ -20,7 +20,11 @@ namespace KMZ_soft.Ware
             InitializeComponent();
             db_con = new SqlConnection(ConfigurationManager.ConnectionStrings["KMZdb"].ConnectionString);
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku Dodaj towar. Wywołuje metode ware_add(string ware_name, string category, double price, int tax, int quantity)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WareAddBTN_Click(object sender, EventArgs e)
         {
             string ware_name = WareAddNameTB.Text;
@@ -32,7 +36,14 @@ namespace KMZ_soft.Ware
 
             ware_add(ware_name, ware_category, ware_price, ware_tax,  ware_quantity);
         }
-
+        /// <summary>
+        /// Metoda wywołująca procedure SQL ware_add
+        /// </summary>
+        /// <param name="ware_name"> nazwa towaru</param>
+        /// <param name="category">kategoria</param>
+        /// <param name="price">cena netto</param>
+        /// <param name="tax">VAT</param>
+        /// <param name="quantity">ilosc</param>
         private void ware_add(string ware_name, string category, double price, int tax, int quantity)
         {
             db_con.Open();

@@ -18,7 +18,11 @@ namespace KMZ_soft
             InitializeComponent();
             db_con = new SqlConnection(ConfigurationManager.ConnectionStrings["KMZdb"].ConnectionString);
         }
-
+        /// <summary>
+        /// Metoda przycisku zaloguj. Wywołuje metodę  login_check(string username, string password)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginBTN_Click(object sender, EventArgs e)
         {
             string username = LoginUserTB.Text;

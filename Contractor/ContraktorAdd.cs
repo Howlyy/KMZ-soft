@@ -18,7 +18,11 @@ namespace KMZ_soft.Contractor
             InitializeComponent();
             db_con = new SqlConnection(ConfigurationManager.ConnectionStrings["KMZdb"].ConnectionString) ;
         }
-
+        /// <summary>
+        /// Metoda użycia przycisku Dodaj kontrahenta. Wywołuje metode add_client(string name, string nip, string address, int id_user)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ContractorAddBTN_Click(object sender, EventArgs e)
         {
             string contractor_name = ContractorAddNameTB.Text;
@@ -37,7 +41,14 @@ namespace KMZ_soft.Contractor
             else
                 MessageBox.Show("Taki kontrahent już istnieje!");
         }
-
+        /// <summary>
+        /// Metoda wywołująca procedure SQL contractor_add
+        /// </summary>
+        /// <param name="name">nazwa kontrahenta</param>
+        /// <param name="nip">nip</param>
+        /// <param name="address">adres</param>
+        /// <param name="id_user">id usera</param>
+        /// <returns>1 - przeszło, 666 - juz taki istnieje</returns>
         private int add_client(string name, string nip, string address, int id_user)
         {
             db_con.Open();
